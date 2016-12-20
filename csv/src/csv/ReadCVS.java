@@ -26,11 +26,19 @@ public class ReadCVS {
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
 
-				// запятая в качестве разделителя
+				// используем запятую в качестве разделителя
 				String[] base = line.split(cvsSplitBy);
+				String a = base[0];
+				String b = base[1];
+				String c = base[2];
+				String d = base[3];
+				String e = base[4];
 
-				System.out.println("должность: " + base[0] + ", ФИО: " + base[1] + ", " + base[2] + " дней отпуска"
-						+ ", с: " + base[3] + " по: " + base[4]);
+				/*
+				 * System.out.println("должность: " + base[0] + ", ФИО: " +
+				 * base[1] + ", " + base[2] + " дней отпуска" + ", с: " +
+				 * base[3] + " по: " + base[4]);
+				 */
 			}
 
 		} catch (FileNotFoundException e) {
@@ -47,7 +55,7 @@ public class ReadCVS {
 			}
 		}
 
-		System.out.println("Готово");
+		// System.out.println("Готово");
 	}
 
 }

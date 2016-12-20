@@ -33,6 +33,7 @@ public class ReadDocxFile {
 
 			FileInputStream doc = new FileInputStream("E://Java/csv/template.docx");
 			XWPFDocument dok = new XWPFDocument(doc);
+			// Замена текста
 			for (XWPFParagraph p : dok.getParagraphs()) {
 				List<XWPFRun> runs = p.getRuns();
 				if (runs != null) {
@@ -40,6 +41,22 @@ public class ReadDocxFile {
 						String text = r.getText(0);
 						if (text != null && text.contains("Поле1")) {
 							text = text.replace("Поле1", "ЗАМЕНА");
+							r.setText(text, 0);
+						}
+						if (text != null && text.contains("Поле2")) {
+							text = text.replace("Поле2", "ЗАМЕНА");
+							r.setText(text, 0);
+						}
+						if (text != null && text.contains("Поле3")) {
+							text = text.replace("Поле3", "ЗАМЕНА");
+							r.setText(text, 0);
+						}
+						if (text != null && text.contains("Поле4")) {
+							text = text.replace("Поле4", "ЗАМЕНА");
+							r.setText(text, 0);
+						}
+						if (text != null && text.contains("Поле5")) {
+							text = text.replace("Поле5", "ЗАМЕНА");
 							r.setText(text, 0);
 						}
 					}
