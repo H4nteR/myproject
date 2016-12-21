@@ -4,21 +4,20 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import csv.ReadCVS;
 
-import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableCell;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 public class ReadDocxFile {
 
 	public static void main(String[] args) {
 
 		try {
+			ArrayList<String> arr = ReadCVS.run();
 			FileInputStream fis = new FileInputStream("E://Java/csv/template.docx");
 			// Этот клас используеться для извлечения содержимого
 			XWPFDocument docx = new XWPFDocument(fis);
@@ -40,23 +39,23 @@ public class ReadDocxFile {
 					for (XWPFRun r : runs) {
 						String text = r.getText(0);
 						if (text != null && text.contains("Поле1")) {
-							text = text.replace("Поле1", "ЗАМЕНА");
+							text = text.replace("Поле1", arr.get(0));
 							r.setText(text, 0);
 						}
 						if (text != null && text.contains("Поле2")) {
-							text = text.replace("Поле2", "ЗАМЕНА");
+							text = text.replace("Поле2", arr.get(1));
 							r.setText(text, 0);
 						}
 						if (text != null && text.contains("Поле3")) {
-							text = text.replace("Поле3", "ЗАМЕНА");
+							text = text.replace("Поле3", arr.get(2));
 							r.setText(text, 0);
 						}
 						if (text != null && text.contains("Поле4")) {
-							text = text.replace("Поле4", "ЗАМЕНА");
+							text = text.replace("Поле4", arr.get(3));
 							r.setText(text, 0);
 						}
 						if (text != null && text.contains("Поле5")) {
-							text = text.replace("Поле5", "ЗАМЕНА");
+							text = text.replace("Поле5", arr.get(4));
 							r.setText(text, 0);
 						}
 					}
