@@ -15,31 +15,43 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 public class ReadDocxFile {
 
 	public static void main(String[] args) {
+		int length = ReadCVS.getLength();
+		for (int i = 0; i <= length; i++) {
+			test(i);
+		}
+	}
+
+	public static void test(int number) {
 
 		try {
-			ArrayList<String> arr = ReadCVS.run();
+			ArrayList<String> arr = ReadCVS.run(number);
 			FileInputStream fis = new FileInputStream("E://Java/csv/template.docx");
-			// Этот клас используеться для извлечения содержимого
+			// This class is used to extract the contents
 			XWPFDocument docx = new XWPFDocument(fis);
-			// Выборка абзаца используя метод getParagraphText()
-			// Получаем все пункты документа
+			// get all the items of the document
 			List<XWPFParagraph> paragraphList = docx.getParagraphs();
 
-			// перебераем paragraphList
+			// iterate paragraphList
 			for (XWPFParagraph paragraph : paragraphList) {
 				// System.out.println(paragraph.getText());
 			}
 
 			FileInputStream doc = new FileInputStream("E://Java/csv/template.docx");
 			XWPFDocument dok = new XWPFDocument(doc);
-			// Замена текста
+			// replace text
+
 			for (XWPFParagraph p : dok.getParagraphs()) {
 				List<XWPFRun> runs = p.getRuns();
 				if (runs != null) {
+
 					for (XWPFRun r : runs) {
 						String text = r.getText(0);
-						if (text != null && text.contains("Поле1")) {
-							text = text.replace("Поле1", arr.get(0));
+						// System.out.print(text.contains("{"));
+						// text.contains("{work}");
+						// System.out.println(text);
+						if (text != null && text.contains("work")) {
+							// System.out.println("ВОШЕЛ");
+							text = text.replace("work", arr.get(0));
 							r.setText(text, 0);
 						}
 						if (text != null && text.contains("Поле2")) {
@@ -69,8 +81,8 @@ public class ReadDocxFile {
 			 * (text.contains("Должность")) { text = text.replace("Должность",
 			 * "фыв"); r.setText(text); } } } } } }
 			 */
-			dok.write(new FileOutputStream("output.docx"));
-			System.out.println("Готово");
+			dok.write(new FileOutputStream("output_" + number + ".docx"));
+			System.out.println("Готово " + number);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

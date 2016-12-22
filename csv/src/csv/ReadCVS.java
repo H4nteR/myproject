@@ -8,26 +8,30 @@ import java.util.ArrayList;
 
 public class ReadCVS {
 
+	public static ArrayList[] arrayOfStringList = new ArrayList[5];
+
 	public static void main(String[] args) {
 
 		ReadCVS obj = new ReadCVS();
-		//obj.run();
+		// obj.run();
 
 	}
 
-	public static ArrayList<String> run() {
+	@SuppressWarnings("unchecked")
+	public static ArrayList<String> run(int num) {
 
 		String csvFile = "E://Java/csv/Base.csv";
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ",";
-		ArrayList<String> result = new ArrayList<String>();
-		try {
 
+		try {
+			int i = 0;
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
+				ArrayList<String> result = new ArrayList<String>();
 
-				// используем запятую в качестве разделителя
+				// use a comma as a delimiter
 				String[] base = line.split(cvsSplitBy);
 				String a = base[0];
 				result.add(a);
@@ -40,11 +44,12 @@ public class ReadCVS {
 				String e = base[4];
 				result.add(e);
 
-				/*
-				 * System.out.println("должность: " + base[0] + ", ФИО: " +
-				 * base[1] + ", " + base[2] + " дней отпуска" + ", с: " +
-				 * base[3] + " по: " + base[4]);
-				 */
+				arrayOfStringList[i] = result;
+				i++;
+				// System.out.println("должность: " + base[0] + ", ФИО: " +
+				// base[1] + ", " + base[2] + " дней отпуска" + ", с: " +
+				// base[3] + " по: " + base[4]);
+
 			}
 
 		} catch (FileNotFoundException e) {
@@ -62,7 +67,13 @@ public class ReadCVS {
 		}
 
 		// System.out.println("Готово");
-		return result;
+		return arrayOfStringList[num];
+	}
+
+	public static int getLength() {
+
+		return arrayOfStringList.length - 1;
+
 	}
 
 }
